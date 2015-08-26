@@ -65,19 +65,19 @@ vec3 Uncharted2Tonemap(vec3 W)
 
 void main()
 {
-	// Rayleigh coefficients
+	// Rayleigh coefficient
 	float sunfade = 1.0 - clamp(1.0 - exp((sunPosition.y / 450000.0)), 0.0, 1.0);
 	float rayleighCoefficient = rayleigh - (1.0 * (1.0 - sunfade));
-	
-	// Mie coefficients
-	vec3 betaM = totalMie(primaries, mieKCoefficient, turbidity) * mieCoefficient;
 	vec3 betaR = totalRayleigh(primaries) * rayleighCoefficient;
+	
+	// Mie coefficient
+	vec3 betaM = totalMie(primaries, mieKCoefficient, turbidity) * mieCoefficient;
 	
 	// Optical length, cutoff angle at 90 to avoid singularity
 	float zenithAngle = acos(max(0.0, dot(up, normalize(vWorldPosition - cameraPos))));
 	float denom = cos(zenithAngle) + 0.15 * pow(93.885 - ((zenithAngle * 180.0) / pi), -1.253);
 	float sR = rayleighZenithLength / denom;
-	float sM = mieZenithLength / denom
+	float sM = mieZenithLength / denom;
 	
 	// Combined extinction factor
 	vec3 Fex = exp(-(betaR * sR + betaM * sM));
@@ -104,8 +104,8 @@ void main()
 	vec3 whiteScale = 1.0 / Uncharted2Tonemap(vec3(tonemapWeighting)); 
 	vec3 curr = Uncharted2Tonemap((log2(2.0 / pow(luminance, 4.0))) * texColor);
 	vec3 color = curr * whiteScale;
-	
 	vec3 retColor = pow(color, vec3(1.0 / (1.2 + (1.2 * sunfade))));
+	
 	gl_FragColor.xyz = retColor;
 	gl_FragColor.w = 1.0;
 }

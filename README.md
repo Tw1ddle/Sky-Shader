@@ -20,8 +20,10 @@ This project is written using the [Haxe](http://haxe.org/) programming language 
 
 * [three.js](https://github.com/mrdoob/three.js) for rendering.
 * Yaroslav Sivakov's [three.js](http://lib.haxe.org/u/yar3333/) externs.
+* The sky shader is a derivative of the three.js [example](http://threejs.org/examples/js/SkyShader.js).
 * Luke Moody's [ShaderParticleEngine](https://github.com/squarefeet/ShaderParticleEngine) particle engine and editor for three.js.
+* dataart's [dat.gui](https://github.com/dataarts/dat.gui) lightweight debug UI library.
 
 ### Notes
-* 
-* At time of writing this is broken on IE due to the dat.gui debug UI used not working on IE.
+* This demo requires a recent graphics card and modern browser to run at all, and probably needs a fast computer to run at full speed. 
+* At time of writing this is broken on IE due to the dat.gui debug UI library not working on IE.

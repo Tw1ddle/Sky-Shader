@@ -3,6 +3,7 @@ package shaders;
 import external.dat.GUI;
 import js.three.Vector3;
 import util.FileReader;
+import motion.*;
 
 class SkyShader {	
 	public static var uniforms = {
@@ -54,9 +55,15 @@ class SkyEffectController {
 	public var sunAngularDiameterDegrees:Float;
 	public var tonemapWeighting:Float;
 	
+	public var preset(default, set):String;
+	public var presetTransitionDuration:Float;
+	
 	public function new() {		
 		setInitialValues();
 		updateUniforms();
+		
+		presetTransitionDuration = 5.0;
+		preset = "stellarDawn";
 	}
 	
 	private inline function setInitialValues():Void {
@@ -137,50 +144,266 @@ class SkyEffectController {
 		#end
 	}
 	
-	#if debug
-	public function addGUIItem(c:SkyEffectController, gui:GUI):Void {		
+	public function restoreSkyToDefaults(duration:Float = 3, inclination:Float = 0.4983, azimuth:Float = 0.1979):Void {		
+		Actuate.tween(this, duration, {
+			turbidity: 4.7,
+			rayleigh: 2.28,
+			mieCoefficient: 0.005,
+			mieDirectionalG: 0.82,
+			luminance: 1.00,
+			inclination: inclination,
+			azimuth: azimuth,
+			refractiveIndex: 1.00029,
+			numMolecules: 2.542e25,
+			depolarizationFactor: 0.02,
+			rayleighZenithLength: 8400,
+			mieV: 3.936,
+			mieZenithLength: 34000,
+			sunIntensityFactor: 1000,
+			sunIntensityFalloffSteepness: 1.5,
+			sunAngularDiameterDegrees: 0.00933,
+			tonemapWeighting: 1000
+		}).onUpdate(function() {
+			this.updateUniforms();
+		});
+		
+		Actuate.tween(this.primaries, duration, {
+			x: 6.8e-7,
+			y: 5.5e-7,
+			z: 4.5e-7
+		}).onUpdate(function() {
+			this.updateUniforms();
+		});
+		
+		Actuate.tween(this.mieKCoefficient, duration, {
+			x: 0.686,
+			y: 0.678,
+			z: 0.666
+		}).onUpdate(function() {
+			this.updateUniforms();
+		});
+		
+		Actuate.tween(this.cameraPos, duration, {
+			x: 100000,
+			y: -40000,
+			z: 0
+		}).onUpdate(function() {
+			this.updateUniforms();
+		});
+	}
+	
+	// Presets
+	public function stellarDawn(duration:Float = 3):Void {
+		Actuate.tween(this, duration, {
+			turbidity: 1.25,
+			rayleigh: 1.00,
+			mieCoefficient: 0.00335,
+			mieDirectionalG: 0.787,
+			luminance: 1.0,
+			inclination: 0.4945,
+			azimuth: 0.2508,
+			refractiveIndex: 1.000317,
+			numMolecules: 2.542e25,
+			depolarizationFactor: 0.067,
+			rayleighZenithLength: 615,
+			mieV: 4.012,
+			mieZenithLength: 500,
+			sunIntensityFactor: 1111,
+			sunIntensityFalloff: 0.98,
+			sunAngularDiameter: 0.00758,
+			tonemapWeighting: 1000
+		}).onUpdate(function() {
+			this.updateUniforms();
+		});
+		
+		Actuate.tween(this.primaries, duration, {
+			x: 6.8e-7,
+			y: 5.5e-7,
+			z: 4.5e-7
+		}).onUpdate(function() {
+			this.updateUniforms();
+		});
+		
+		Actuate.tween(this.mieKCoefficient, duration, {
+			x: 0.686,
+			y: 0.678,
+			z: 0.666
+		}).onUpdate(function() {
+			this.updateUniforms();
+		});
+		
+		Actuate.tween(this.cameraPos, duration, {
+			x: 100000,
+			y: -40000,
+			z: 0
+		}).onUpdate(function() {
+			this.updateUniforms();
+		});
+	}
+	
+	public function redSunset(duration:Float = 3):Void {
+		Actuate.tween(this, duration, {
+			turbidity: 1.25,
+			rayleigh: 1.00,
+			mieCoefficient: 0.00335,
+			mieDirectionalG: 0.787,
+			luminance: 1.0,
+			inclination: 0.4945,
+			azimuth: 0.2508,
+			refractiveIndex: 1.000317,
+			numMolecules: 2.542e25,
+			depolarizationFactor: 0.067,
+			rayleighZenithLength: 615,
+			mieV: 4.012,
+			mieZenithLength: 500,
+			sunIntensityFactor: 1111,
+			sunIntensityFalloff: 0.98,
+			sunAngularDiameter: 0.00758,
+			tonemapWeighting: 1000
+		}).onUpdate(function() {
+			this.updateUniforms();
+		});
+		
+		Actuate.tween(this.primaries, duration, {
+			x: 6.8e-7,
+			y: 5.5e-7,
+			z: 4.5e-7
+		}).onUpdate(function() {
+			this.updateUniforms();
+		});
+		
+		Actuate.tween(this.mieKCoefficient, duration, {
+			x: 0.686,
+			y: 0.678,
+			z: 0.666
+		}).onUpdate(function() {
+			this.updateUniforms();
+		});
+		
+		Actuate.tween(this.cameraPos, duration, {
+			x: 100000,
+			y: -40000,
+			z: 0
+		}).onUpdate(function() {
+			this.updateUniforms();
+		});
+	}
+	
+	public function alienDay(duration:Float = 3):Void {
+		Actuate.tween(this, duration, {
+			turbidity: 1.25,
+			rayleigh: 1.00,
+			mieCoefficient: 0.00335,
+			mieDirectionalG: 0.787,
+			luminance: 1.0,
+			inclination: 0.4945,
+			azimuth: 0.2508,
+			refractiveIndex: 1.000317,
+			numMolecules: 2.542e25,
+			depolarizationFactor: 0.067,
+			rayleighZenithLength: 615,
+			mieV: 4.012,
+			mieZenithLength: 500,
+			sunIntensityFactor: 1111,
+			sunIntensityFalloff: 0.98,
+			sunAngularDiameter: 0.00758,
+			tonemapWeighting: 1000
+		}).onUpdate(function() {
+			this.updateUniforms();
+		});
+		
+		Actuate.tween(this.primaries, duration, {
+			x: 6.8e-7,
+			y: 5.5e-7,
+			z: 4.5e-7
+		}).onUpdate(function() {
+			this.updateUniforms();
+		});
+		
+		Actuate.tween(this.mieKCoefficient, duration, {
+			x: 0.686,
+			y: 0.678,
+			z: 0.666
+		}).onUpdate(function() {
+			this.updateUniforms();
+		});
+		
+		Actuate.tween(this.cameraPos, duration, {
+			x: 100000,
+			y: -40000,
+			z: 0
+		}).onUpdate(function() {
+			this.updateUniforms();
+		});
+	}
+	
+	public function presetChanged(preset:String, duration:Float = 3):Void {
+		switch(preset) {
+			case "stellarDawn":
+				stellarDawn(duration);
+			case "redSunset":
+				redSunset(duration);
+			case "alienDay":
+				alienDay(duration);
+			default:
+				trace("Got bad preset, doing nothing...");
+		}
+	}
+	
+	public function onPresetChanged(preset:String):Void {
+		presetChanged(preset);
+	}
+	
+	public function addGUIItem(c:SkyEffectController, parentGui:GUI):Void {		
 		var controller:SkyEffectController = cast c;
 		
 		var updateValues = function(t:Dynamic) {
 			controller.updateUniforms();
 		};
 		
-		gui.add(controller, "turbidity").step(0.025).listen().onChange(updateValues);
-		gui.add(controller, "rayleigh").step(0.005).listen().onChange(updateValues);
-		gui.add(controller, "mieCoefficient").step(0.000025).listen().onChange(updateValues);
-		gui.add(controller, "mieDirectionalG").step(0.001).listen().onChange(updateValues);
-		gui.add(controller, "luminance").step(0.0005).listen().onChange(updateValues);
-		gui.add(controller, "inclination").step(0.0001).listen().onChange(updateValues);
-		gui.add(controller, "azimuth").step(0.0001).listen().onChange(updateValues);
+		parentGui.add(controller, "preset", ["stellarDawn", "redSunset", "alienDay"]).listen().onChange(onPresetChanged);
 		
-		gui.add(controller, "refractiveIndex").step(0.000001).listen().onChange(updateValues);
-		gui.add(controller, "numMolecules", 2.542e10, 2.542e26, 1e10).listen().onChange(updateValues);
-		gui.add(controller, "depolarizationFactor").step(0.001).listen().onChange(updateValues);
+		var parametersFolder = parentGui.addFolder("parameters");
 		
-		gui.add(controller, "rayleighZenithLength").step(15.0).listen().onChange(updateValues);
-		gui.add(controller, "mieV").step(0.001).listen().onChange(updateValues);
-		gui.add(controller, "mieZenithLength").step(100.0).listen().onChange(updateValues);
-		gui.add(controller, "sunIntensityFactor").step(1.0).listen().onChange(updateValues);
-		gui.add(controller, "sunIntensityFalloffSteepness").step(0.01).listen().onChange(updateValues);
-		gui.add(controller, "sunAngularDiameterDegrees").step(0.00001).listen().onChange(updateValues);
+		parametersFolder.add(controller, "turbidity").step(0.025).listen().onChange(updateValues);
+		parametersFolder.add(controller, "rayleigh").step(0.005).listen().onChange(updateValues);
+		parametersFolder.add(controller, "mieCoefficient").step(0.000025).listen().onChange(updateValues);
+		parametersFolder.add(controller, "mieDirectionalG").step(0.001).listen().onChange(updateValues);
+		parametersFolder.add(controller, "luminance").step(0.0005).listen().onChange(updateValues);
+		parametersFolder.add(controller, "inclination").step(0.0001).listen().onChange(updateValues);
+		parametersFolder.add(controller, "azimuth").step(0.0001).listen().onChange(updateValues);
 		
-		var tonemapFolder = gui.addFolder("tonemap");
-		tonemapFolder.add(controller, "tonemapWeighting").step(1).listen().onChange(updateValues);
+		parametersFolder.add(controller, "refractiveIndex").step(0.000001).listen().onChange(updateValues);
+		parametersFolder.add(controller, "numMolecules", 2.542e10, 2.542e26, 1e10).listen().onChange(updateValues);
+		parametersFolder.add(controller, "depolarizationFactor").step(0.001).listen().onChange(updateValues);
 		
-		var primariesFolder = gui.addFolder("primaries");
+		parametersFolder.add(controller, "rayleighZenithLength").step(15.0).listen().onChange(updateValues);
+		parametersFolder.add(controller, "mieV").step(0.001).listen().onChange(updateValues);
+		parametersFolder.add(controller, "mieZenithLength").step(100.0).listen().onChange(updateValues);
+		parametersFolder.add(controller, "sunIntensityFactor").step(1.0).listen().onChange(updateValues);
+		parametersFolder.add(controller, "sunIntensityFalloffSteepness").step(0.01).listen().onChange(updateValues);
+		parametersFolder.add(controller, "sunAngularDiameterDegrees").step(0.00001).listen().onChange(updateValues);
+		parametersFolder.add(controller, "tonemapWeighting").step(1).listen().onChange(updateValues);
+		
+		var primariesFolder = parentGui.addFolder("primaries");
 		primariesFolder.add(controller.primaries, "x", 5e-12, 9e-7, 5e-13).listen().onChange(updateValues);
 		primariesFolder.add(controller.primaries, "y", 5e-12, 9e-7, 5e-13).listen().onChange(updateValues);
 		primariesFolder.add(controller.primaries, "z", 5e-12, 9e-7, 5e-13).listen().onChange(updateValues);
 		
-		var mieFolder = gui.addFolder("mieCoefficient");
+		var mieFolder = parentGui.addFolder("mieCoefficient");
 		mieFolder.add(controller.mieKCoefficient, "x").step(0.001).listen().onChange(updateValues);
 		mieFolder.add(controller.mieKCoefficient, "y").step(0.001).listen().onChange(updateValues);
 		mieFolder.add(controller.mieKCoefficient, "z").step(0.001).listen().onChange(updateValues);
 		
-		var camFolder = gui.addFolder("cameraPos");
+		var camFolder = parentGui.addFolder("cameraPos");
 		camFolder.add(controller.cameraPos, "x").step(250).listen().onChange(updateValues);
 		camFolder.add(controller.cameraPos, "y").step(250).listen().onChange(updateValues);
 		camFolder.add(controller.cameraPos, "z").step(250).listen().onChange(updateValues);
 	}
-	#end
+	
+	private function set_preset(nextPreset:String):String {
+		this.preset = nextPreset;
+		presetChanged(nextPreset, presetTransitionDuration);
+		return preset;
+	}
 }

@@ -24,16 +24,19 @@ class Main {
 	public static inline var DEGREES_TO_RAD:Float = 0.01745329;
 	public static inline var GAME_VIEWPORT_WIDTH:Float = 800;
 	public static inline var GAME_VIEWPORT_HEIGHT:Float = 500;
-	private static inline var REPO_URL:String = "https://github.com/Tw1ddle/Ludum-Dare-33";
+	private static inline var REPO_URL:String = "https://github.com/Tw1ddle/Sky-Particles-Shader";
 	private static inline var TWITTER_URL:String = "https://twitter.com/Sam_Twidale";
-	private static inline var LUDUM_DARE_URL:String = "http://ludumdare.com/";
+	private static inline var LUDUM_DARE_URL:String = "http://ludumdare.com/compo/ludum-dare-33/?action=preview&uid=42276";
 	private static inline var WEBSITE_URL:String = "http://samcodes.co.uk/";
+	private static inline var HAXE_URL:String = "http://haxe.org/";
+	private static inline var THREEJS_URL:String = "https://github.com/mrdoob/three.js/";
 	
-	#if debug
 	private var guiItemCount:Int = 0;
 	public var particleGUI(default, null):GUI = new GUI( { autoPlace:true } );
 	public var shaderGUI(default, null):GUI = new GUI( { autoPlace:true } );
 	public var sceneGUI(default, null):GUI = new GUI( { autoPlace:true } );
+	
+	#if debug
 	public var stats(default, null):Stats = new Stats();
 	#end
 	
@@ -52,15 +55,15 @@ class Main {
 	private var lastAnimationTime:Float = 0.0; // Last time from requestAnimationFrame
 	private var dt:Float = 0.0; // Frame delta time
 	
-    public static function main():Void {
+    private static function main():Void {
 		var main = new Main();
 	}
 	
-	public inline function new() {
+	private inline function new() {
 		Browser.window.onload = onWindowLoaded;
 	}
 	
-	public inline function onWindowLoaded():Void {
+	private inline function onWindowLoaded():Void {
 		// Attach game div
 		gameAttachPoint = Browser.document.getElementById("game");		
 		var gameDiv = Browser.document.createElement("attach");
@@ -96,7 +99,7 @@ class Main {
 		credits.style.width = '100%';
 		credits.style.textAlign = 'center';
 		credits.style.color = '#333333';
-		credits.innerHTML = 'Created by <a href=' + TWITTER_URL + ' target="_blank">Sam Twidale</a> for <a href=' + LUDUM_DARE_URL + ' target="_blank">Ludum Dare 33</a>. Get the code <a href=' + REPO_URL + ' target="_blank">here</a>.';
+		credits.innerHTML = 'Created for <a href=' + LUDUM_DARE_URL + ' target="_blank">Ludum Dare 33</a> using <a href=' + HAXE_URL + ' target="_blank">Haxe</a> and <a href=' + THREEJS_URL + ' target="_blank">three.js</a>. Get the code <a href=' + REPO_URL + ' target="_blank">here</a>.';
 		gameDiv.appendChild(credits);
 		
 		// Setup WebGL renderer
@@ -107,7 +110,7 @@ class Main {
 		renderer.setClearColor(new Color(0x222222));
 		
 		// Setup cameras
-        worldCamera = new PerspectiveCamera(90, GAME_VIEWPORT_WIDTH / GAME_VIEWPORT_HEIGHT, 0.5, 2000000);
+        worldCamera = new PerspectiveCamera(30, GAME_VIEWPORT_WIDTH / GAME_VIEWPORT_HEIGHT, 0.5, 2000000);
 		
 		// Setup world entities
 		var skyMaterial = new ShaderMaterial( {
@@ -116,7 +119,7 @@ class Main {
 			uniforms: SkyShader.uniforms,
 			side: BackSide
 		});
-		var skyMesh = new Mesh(new SphereGeometry(450000, 32, 15), skyMaterial);
+		var skyMesh = new Mesh(new SphereGeometry(450000, 32, 15), skyMaterial); // Note 450000 sky radius is used for calculating the sun fade factor in the sky shader
 		
 		#if debug
 		skyMesh.name = "Sky Mesh";
@@ -125,26 +128,26 @@ class Main {
 		worldScene.add(skyMesh);
 		
 		// Stars
-		starGroup = new Group( { texture: ImageUtils.loadTexture('assets/images/icefly.png'), maxAge: 3 } );
+		starGroup = new Group( { texture: ImageUtils.loadTexture('assets/images/firefly.png'), maxAge: 3 } );
 		starEmitter = new Emitter({
 			type: 'cube',
-			position: new Vector3(0, 0, -14170), // worldCamera position * 10
-			positionSpread: new Vector3(Main.GAME_VIEWPORT_WIDTH * 12, Main.GAME_VIEWPORT_HEIGHT * 10, 0), // Extra space on x axis so new stars appear before player sees them
-			acceleration: new Vector3(0, 0, 0),
-			accelerationSpread: new Vector3(0, 0, 0),
+			position: new Vector3(0, 640, -1417),
+			positionSpread: new Vector3(Main.GAME_VIEWPORT_WIDTH * 3, Main.GAME_VIEWPORT_HEIGHT * 3, 0),
+			acceleration: new Vector3(0, -1, 0),
+			accelerationSpread: new Vector3(3, 8, 16),
 			velocity: new Vector3(0, 0, 0),
 			velocitySpread: new Vector3(0, 0, 0),
-			particleCount: 2000,
+			particleCount: 5000,
 			opacityStart: 0.0,
 			opacityMiddle: 0.6,
 			opacityMiddleSpread: 0.4,
 			opacityEnd: 0.0,
-			sizeStart: 220,
+			sizeStart: 20,
+			sizeEnd: 20,
+			alive: 1.0
 		});
-		
-		#if debug
+
 		starGroup.mesh.name = "Star Particle Group";
-		#end
 		
 		starGroup.addEmitter(starEmitter);
 		starGroup.mesh.frustumCulled = false;
@@ -154,24 +157,22 @@ class Main {
 		windGroup = new Group( { texture: ImageUtils.loadTexture('assets/images/firefly.png'), maxAge: 5 });
 		windEmitter = new Emitter({
 			type: 'cube',
-			position: new Vector3(Main.GAME_VIEWPORT_WIDTH, 0, -1417),
-			positionSpread: new Vector3(100, Main.GAME_VIEWPORT_HEIGHT, 0),
-			acceleration: new Vector3(1, 0, 0),
-			accelerationSpread: new Vector3(17, 47, -127),
-			velocity: new Vector3(-576, 0, 0),
-			velocitySpread: new Vector3(0, 0, 0),
-			sizeStart: 10,
-			sizeEnd: 10,
+			position: new Vector3(700, 150, -1417),
+			positionSpread: new Vector3(130, 600, 0),
+			acceleration: new Vector3(-34, 11, 61),
+			accelerationSpread: new Vector3(6, 35, 0),
+			velocity: new Vector3(-46, 0, 0),
+			velocitySpread: new Vector3(-28, 27, 0),
 			opacityStart: 0,
 			opacityMiddle: 1,
 			opacityEnd: 0,
-			particleCount: 5000,
-			alive: 0
+			particleCount: 200,
+			sizeStart: 14,
+			sizeEnd: 14,
+			alive: 1.0
 		});
 		
-		#if debug
 		windGroup.mesh.name = "Wind Particle Group";
-		#end
 		
 		windGroup.addEmitter(windEmitter);
 		windGroup.mesh.frustumCulled = false;
@@ -188,80 +189,15 @@ class Main {
 			event.preventDefault();
 		}, true);
 		
-		// Debug setup
+		setupGUI();
+		
 		#if debug
 		setupStats();
-		setupGUI();
 		#end
 		
 		// Present game and start animation loop
 		gameDiv.appendChild(renderer.domElement);
 		Browser.window.requestAnimationFrame(animate);
-	}
-	
-	public function restoreSkyToDefaults(duration:Float = 3, inclination:Float = 0.4983, azimuth:Float = 0.1979):Void {		
-		Actuate.tween(skyEffectController, duration, {
-			turbidity: 4.7,
-			rayleigh: 2.28,
-			mieCoefficient: 0.005,
-			mieDirectionalG: 0.82,
-			luminance: 1.00,
-			inclination: inclination,
-			azimuth: azimuth,
-			refractiveIndex: 1.00029,
-			numMolecules: 2.542e25,
-			depolarizationFactor: 0.02,
-			rayleighZenithLength: 8400,
-			mieV: 3.936,
-			mieZenithLength: 34000,
-			sunIntensityFactor: 1000,
-			sunIntensityFalloffSteepness: 1.5,
-			sunAngularDiameterDegrees: 0.00933
-		}).onUpdate(function() {
-			skyEffectController.updateUniforms();
-		});
-		
-		Actuate.tween(skyEffectController.primaries, duration, {
-			x: 6.8e-7,
-			y: 5.5e-7,
-			z: 4.5e-7
-		}).onUpdate(function() {
-			skyEffectController.updateUniforms();
-		});
-		
-		Actuate.tween(skyEffectController.cameraPos, duration, {
-			x: 100000,
-			y: -40000,
-			z: 0
-		}).onUpdate(function() {
-			skyEffectController.updateUniforms();
-		});
-		
-		Actuate.tween(skyEffectController.mieKCoefficient, duration, {
-			x: 0.686,
-			y: 0.678,
-			z: 0.666
-		}).onUpdate(function() {
-			skyEffectController.updateUniforms();
-		});
-	}
-	
-	public function restoreStarsToDefaults():Void {
-		starEmitter.position.set(0, 0, -14170);
-		starEmitter.positionSpread.set(Main.GAME_VIEWPORT_WIDTH * 12, Main.GAME_VIEWPORT_HEIGHT * 10, 0);
-		starEmitter.acceleration.set(0, 0, 0);
-		starEmitter.accelerationSpread.set(0, 0, 0);
-		starEmitter.velocity.set(0, 0, 0);
-		starEmitter.velocitySpread.set(0, 0, 0);
-		starEmitter.particleCount = 2000;
-		starEmitter.opacityStart = 0.0;
-		starEmitter.opacityMiddle = 0.3;
-		starEmitter.opacityEnd = 0.0;
-		starEmitter.sizeStart = 220;
-		starEmitter.sizeMiddle = 220;
-		starEmitter.sizeEnd = 220;
-		starEmitter.alive = 0.5;
-		// NOTE this doesn't reset everything, there are more props...
 	}
 	
 	private function animate(time:Float):Void {
@@ -283,21 +219,14 @@ class Main {
 		Browser.window.requestAnimationFrame(animate);
 	}
 	
-	#if debug
-	private inline function setupStats():Void {
-		stats.domElement.style.position = 'absolute';
-		stats.domElement.style.top = '0px';
-		Browser.window.document.body.appendChild(stats.domElement);
-	}
-	
 	private inline function setupGUI():Void {
+		addGUIItem(shaderGUI, skyEffectController, "Sky Shader");
 		addGUIItem(sceneGUI, worldCamera, "World Camera");
 		addGUIItem(particleGUI.addFolder("Star Emitter"), starEmitter, "Star Emitter");
 		addGUIItem(particleGUI.addFolder("Wind Emitter"), windEmitter, "Wind Emitter");		
-		addGUIItem(shaderGUI, skyEffectController, "Sky Shader");
 	}
 	
-	public function addGUIItem(gui:GUI, object:Dynamic, ?tag:String):GUI {
+	private function addGUIItem(gui:GUI, object:Dynamic, ?tag:String):GUI {
 		if (gui == null || object == null) {
 			return null;
 		}
@@ -330,18 +259,6 @@ class Main {
 			folder.add(object3d.scale, 'x', 0.0, 10.0, 0.1).listen();
 			folder.add(object3d.scale, 'y', 0.0, 10.0, 0.1).listen();
 			folder.add(object3d.scale, 'z', 0.0, 10.0, 0.1).listen();
-			
-			folder.add(object3d, 'visible');
-		}
-		
-		if (Std.is(object, Mesh)) {
-			var mesh:Mesh = cast object;
-			var materialFolder = folder.addFolder("material (" + guiItemCount + ")");
-			materialFolder.add(mesh.material, "opacity", 0, 1, 0.01).listen();
-		}
-		
-		if (Std.is(object, PerspectiveCamera)) {
-			var camera:PerspectiveCamera = cast object;
 		}
 		
 		if (Std.is(object, Emitter)) {
@@ -380,6 +297,13 @@ class Main {
 		}
 		
 		return folder;
+	}
+	
+	#if debug
+	private inline function setupStats():Void {
+		stats.domElement.style.position = 'absolute';
+		stats.domElement.style.top = '0px';
+		Browser.window.document.body.appendChild(stats.domElement);
 	}
 	#end
 }
