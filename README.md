@@ -16,11 +16,11 @@ Use the controls in the top right of the screen to modify the shader and particl
 
 ### Credits
 
-This project is written using the [Haxe](http://haxe.org/) programming language and depends on:
+This project is written using the [Haxe](http://haxe.org/) programming language and uses:
 
 * [three.js](https://github.com/mrdoob/three.js) for rendering.
 * Yaroslav Sivakov's [three.js](http://lib.haxe.org/u/yar3333/) externs.
-* The sky shader is a derivative of the three.js [example](http://threejs.org/examples/js/SkyShader.js).
+* The sky shader is a derivative of this three.js [example](http://threejs.org/examples/js/SkyShader.js).
 * Luke Moody's [ShaderParticleEngine](https://github.com/squarefeet/ShaderParticleEngine) particle engine and editor for three.js.
 * dataart's [dat.gui](https://github.com/dataarts/dat.gui) lightweight debug UI library.
 

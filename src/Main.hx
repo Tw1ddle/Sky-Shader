@@ -45,7 +45,7 @@ class Main {
 
 	private var gameAttachPoint:Dynamic;
 	private var renderer:WebGLRenderer;
-	public var skyEffectController(default, null):SkyEffectController = new SkyEffectController();
+	public var skyEffectController(default, null):SkyEffectController;
 	
 	private var starGroup:Group;
 	public var starEmitter(default, null):Emitter;
@@ -112,21 +112,6 @@ class Main {
 		// Setup cameras
         worldCamera = new PerspectiveCamera(30, GAME_VIEWPORT_WIDTH / GAME_VIEWPORT_HEIGHT, 0.5, 2000000);
 		
-		// Setup world entities
-		var skyMaterial = new ShaderMaterial( {
-			fragmentShader: SkyShader.fragmentShader,
-			vertexShader: SkyShader.vertexShader,
-			uniforms: SkyShader.uniforms,
-			side: BackSide
-		});
-		var skyMesh = new Mesh(new SphereGeometry(450000, 32, 15), skyMaterial); // Note 450000 sky radius is used for calculating the sun fade factor in the sky shader
-		
-		#if debug
-		skyMesh.name = "Sky Mesh";
-		#end
-		
-		worldScene.add(skyMesh);
-		
 		// Stars
 		starGroup = new Group( { texture: ImageUtils.loadTexture('assets/images/firefly.png'), maxAge: 3 } );
 		starEmitter = new Emitter({
@@ -154,7 +139,7 @@ class Main {
 		worldScene.add(starGroup.mesh);
 		
 		// Wind
-		windGroup = new Group( { texture: ImageUtils.loadTexture('assets/images/firefly.png'), maxAge: 5 });
+		windGroup = new Group( { texture: ImageUtils.loadTexture('assets/images/airfly.png'), maxAge: 5 });
 		windEmitter = new Emitter({
 			type: 'cube',
 			position: new Vector3(700, 150, -1417),
@@ -177,6 +162,23 @@ class Main {
 		windGroup.addEmitter(windEmitter);
 		windGroup.mesh.frustumCulled = false;
 		worldScene.add(windGroup.mesh);
+		
+		// Setup world entities
+		skyEffectController = new SkyEffectController(this);
+		
+		var skyMaterial = new ShaderMaterial( {
+			fragmentShader: SkyShader.fragmentShader,
+			vertexShader: SkyShader.vertexShader,
+			uniforms: SkyShader.uniforms,
+			side: BackSide
+		});
+		var skyMesh = new Mesh(new SphereGeometry(450000, 32, 15), skyMaterial); // Note 450000 sky radius is used for calculating the sun fade factor in the sky shader
+		
+		#if debug
+		skyMesh.name = "Sky Mesh";
+		#end
+		
+		worldScene.add(skyMesh);
 
 		// Event setup
 		// Window resize event
