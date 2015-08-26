@@ -10,7 +10,7 @@ Use the controls in the top right of the screen to modify the shader and particl
 
 ![Screenshot1](https://github.com/Tw1ddle/Sky-Particles-Shader/blob/master/dev/screenshots/screenshot_1.png?raw=true "Screenshot 1")
 
-![Screenshot2]https://github.com/Tw1ddle/Sky-Particles-Shader/blob/master/dev/screenshots/screenshot_2.png?raw=true "Screenshot 2")
+![Screenshot2](https://github.com/Tw1ddle/Sky-Particles-Shader/blob/master/dev/screenshots/screenshot_2.png?raw=true "Screenshot 2")
 
 ![Screenshot3](https://github.com/Tw1ddle/Sky-Particles-Shader/blob/master/dev/screenshots/screenshot_3.png?raw=true "Screenshot 3")
 
