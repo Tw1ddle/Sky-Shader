@@ -1,6 +1,6 @@
-# Sky and Particles
+# Sky and Particles Editor
 
-Building on the sky shader and particle system code used in my entry for Ludum Dare 33, [Otherworldly Stars](http://samcodes.itch.io/otherworldly-stars).
+Run it in the browser [here](http://samcodes.itch.io/sky-shader-editor). Building on the sky shader and particle system code used in my entry for Ludum Dare 33, [Otherworldly Stars](http://samcodes.itch.io/otherworldly-stars).
 
 ### Usage
 
