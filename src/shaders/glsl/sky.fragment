@@ -1,5 +1,12 @@
 varying vec3 vWorldPosition;
 
+// Based on "A Practical Analytic Model for Daylight" aka The Preetham Model, the de facto standard analytic skydome model
+// http://www.cs.utah.edu/~shirley/papers/sunsky/sunsky.pdf
+// Original implementation by Simon Wallner: http://www.simonwallner.at/projects/atmospheric-scattering
+// Improved by Martin Upitis: http://blenderartists.org/forum/showthread.php?245954-preethams-sky-impementation-HDR
+// Three.js integration by zz85: http://twitter.com/blurspline / https://github.com/zz85 / http://threejs.org/examples/webgl_shaders_sky.html
+// Additional uniforms, refactoring and integrated with editable sky example: https://twitter.com/Sam_Twidale / https://github.com/Tw1ddle/Sky-Particles-Shader
+
 uniform vec3 sunPosition;
 uniform float luminance;
 uniform float turbidity;
