@@ -1,8 +1,8 @@
 # Sky and Particle Shader Editor
 
-Configurable sky and particle editor based on the [Preetham Model](http://www.cs.utah.edu/~shirley/papers/sunsky/sunsky.pdf).
+Configurable sky and particle editor. Run it in the browser [here](http://samcodes.itch.io/sky-shader-editor). The WebGL shader is based on the [Preetham Model](http://www.cs.utah.edu/~shirley/papers/sunsky/sunsky.pdf) and this [three.js](http://threejs.org/examples/js/SkyShader.js) example.
 
-Run it in the browser [here](http://samcodes.itch.io/sky-shader-editor). This builds on the sky shader and particle system code used in my entry for Ludum Dare 33, [Otherworldly Stars](http://samcodes.itch.io/otherworldly-stars).
+This also builds on the sky shader and particle system code used in my entry for Ludum Dare 33, [Otherworldly Stars](http://samcodes.itch.io/otherworldly-stars).
 
 ## Usage ##
 
