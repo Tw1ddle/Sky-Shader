@@ -1,12 +1,14 @@
 # Sky and Particles Editor
 
-Run it in the browser [here](http://samcodes.itch.io/sky-shader-editor). Building on the sky shader and particle system code used in my entry for Ludum Dare 33, [Otherworldly Stars](http://samcodes.itch.io/otherworldly-stars).
+Configurable sky and particle editor based on the [Preetham Model](http://www.cs.utah.edu/~shirley/papers/sunsky/sunsky.pdf).
 
-### Usage
+Run it in the browser [here](http://samcodes.itch.io/sky-shader-editor). This builds on the sky shader and particle system code used in my entry for Ludum Dare 33, [Otherworldly Stars](http://samcodes.itch.io/otherworldly-stars).
 
-Use the controls in the top right of the screen to modify the shader and particle system values.
+## Usage ##
 
-### Screenshots
+Use the controls in the top right of the [browser demo](http://samcodes.itch.io/sky-shader-editor) to modify the shader and particle system values.
+
+## Screenshots ##
 
 ![Screenshot1](https://github.com/Tw1ddle/Sky-Particles-Shader/blob/master/dev/screenshots/screenshot_1.png?raw=true "Screenshot 1")
 
@@ -14,7 +16,7 @@ Use the controls in the top right of the screen to modify the shader and particl
 
 ![Screenshot3](https://github.com/Tw1ddle/Sky-Particles-Shader/blob/master/dev/screenshots/screenshot_3.png?raw=true "Screenshot 3")
 
-### Credits
+## Credits ##
 
 This project is written using the [Haxe](http://haxe.org/) programming language and uses:
 
@@ -24,6 +26,6 @@ This project is written using the [Haxe](http://haxe.org/) programming language 
 * Luke Moody's [ShaderParticleEngine](https://github.com/squarefeet/ShaderParticleEngine) particle engine and editor for three.js.
 * dataart's [dat.gui](https://github.com/dataarts/dat.gui) lightweight debug UI library.
 
-### Notes
+## Notes ##
 * This demo requires a recent graphics card and modern browser to run at all, and probably needs a fast computer to run at full speed. 
 * At time of writing this is broken on IE due to the dat.gui debug UI library not working on IE.
