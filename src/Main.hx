@@ -13,10 +13,9 @@ import js.three.PerspectiveCamera;
 import js.three.Scene;
 import js.three.ShaderMaterial;
 import js.three.SphereGeometry;
-import js.three.utils.Stats;
 import js.three.Vector3;
 import js.three.WebGLRenderer;
-import motion.Actuate;
+import js.three.utils.Stats;
 import motion.easing.*;
 import shaders.SkyEffectController;
 
@@ -65,7 +64,7 @@ class Main {
 	
 	private inline function onWindowLoaded():Void {
 		// Attach game div
-		gameAttachPoint = Browser.document.getElementById("game");		
+		gameAttachPoint = Browser.document.getElementById("game");
 		var gameDiv = Browser.document.createElement("attach");
 		gameAttachPoint.appendChild(gameDiv);
 		

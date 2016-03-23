@@ -1,24 +1,24 @@
 varying vec3 vWorldPosition;
 
-uniform vec3 sunPosition;
+uniform vec3 cameraPos;
+uniform float depolarizationFactor;
 uniform float luminance;
-uniform float turbidity;
-uniform float rayleigh;
 uniform float mieCoefficient;
 uniform float mieDirectionalG;
-uniform vec3 cameraPos;
-uniform float refractiveIndex;
-uniform float numMolecules;
-uniform float depolarizationFactor;
-uniform vec3 primaries;
 uniform vec3 mieKCoefficient;
 uniform float mieV;
-uniform float rayleighZenithLength;
 uniform float mieZenithLength;
+uniform float numMolecules;
+uniform vec3 primaries;
+uniform float rayleigh;
+uniform float rayleighZenithLength;
+uniform float refractiveIndex;
+uniform float sunAngularDiameterDegrees;
 uniform float sunIntensityFactor;
 uniform float sunIntensityFalloffSteepness;
-uniform float sunAngularDiameterDegrees;
+uniform vec3 sunPosition;
 uniform float tonemapWeighting;
+uniform float turbidity;
 
 const float pi = 3.141592653589793238462643383279502884197169;
 const vec3 up = vec3(0.0, 1.0, 0.0);
@@ -106,6 +106,5 @@ void main()
 	vec3 color = curr * whiteScale;
 	vec3 retColor = pow(color, vec3(1.0 / (1.2 + (1.2 * sunfade))));
 	
-	gl_FragColor.xyz = retColor;
-	gl_FragColor.w = 1.0;
+	gl_FragColor = vec4(retColor, 1.0);
 }

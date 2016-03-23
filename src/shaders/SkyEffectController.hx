@@ -25,7 +25,7 @@ class SkyShader {
 		sunIntensityFactor: { type: "f", value:1.0 },
 		sunIntensityFalloffSteepness: { type: "f", value:1.0 },
 		sunAngularDiameterDegrees: { type: "f", value:1.0 },
-		tonemapWeighting: { type: "f", value:1000.0 }
+		tonemapWeighting: { type: "f", value: 9.50 }
 	};
 	
 	public static var vertexShader = FileReader.readFile("shaders/glsl/sky.vertex");
@@ -107,7 +107,7 @@ class SkyEffectController {
 		sunAngularDiameterDegrees = 0.0093333;
 		
 		// W factor in tonemap calculation
-		tonemapWeighting = 1000.0;
+		tonemapWeighting = 9.50;
 	}
 	
 	// The reason I'm not using getters/setters is because it makes using dat.gui more annoying e.g. most fields being called "value" because of the way the uniforms are stored
@@ -190,7 +190,7 @@ class SkyEffectController {
 			sunIntensityFactor: 1111,
 			sunIntensityFalloffSteepness: 0.98,
 			sunAngularDiameterDegrees: 0.00758,
-			tonemapWeighting: 1000
+			tonemapWeighting: 9.50
 		}).onUpdate(function() {
 			this.updateUniforms();
 		});
@@ -246,7 +246,7 @@ class SkyEffectController {
 			sunIntensityFactor: 1000,
 			sunIntensityFalloffSteepness: 1.5,
 			sunAngularDiameterDegrees: 0.00933,
-			tonemapWeighting: 1000
+			tonemapWeighting: 9.50
 		}).onUpdate(function() {
 			this.updateUniforms();
 		});
@@ -302,7 +302,7 @@ class SkyEffectController {
 			sunIntensityFactor: 1024,
 			sunIntensityFalloffSteepness: 1.4,
 			sunAngularDiameterDegrees: 0.006,
-			tonemapWeighting: 1000
+			tonemapWeighting: 9.50
 		}).onUpdate(function() {
 			this.updateUniforms();
 		});
@@ -358,7 +358,7 @@ class SkyEffectController {
 			sunIntensityFactor: 1151,
 			sunIntensityFalloffSteepness: 1.22,
 			sunAngularDiameterDegrees: 0.00639,
-			tonemapWeighting: 1000
+			tonemapWeighting: 9.50
 		}).onUpdate(function() {
 			this.updateUniforms();
 		});
@@ -414,7 +414,7 @@ class SkyEffectController {
 			sunIntensityFactor: 1631,
 			sunIntensityFalloffSteepness: 1.5,
 			sunAngularDiameterDegrees: 0.00933,
-			tonemapWeighting: 1000
+			tonemapWeighting: 9.50
 		}).onUpdate(function() {
 			this.updateUniforms();
 		});
@@ -470,7 +470,7 @@ class SkyEffectController {
 			sunIntensityFactor: 2069,
 			sunIntensityFalloffSteepness: 2.26,
 			sunAngularDiameterDegrees: 0.01487,
-			tonemapWeighting: 1000
+			tonemapWeighting: 9.50
 		}).onUpdate(function() {
 			this.updateUniforms();
 		});
