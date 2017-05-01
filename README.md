@@ -1,4 +1,6 @@
-# Skies and Particles
+# Sky Shader
+
+[![Build Status](https://img.shields.io/travis/Tw1ddle/Sky-Particles-Shader.svg?style=flat-square)](https://travis-ci.org/Tw1ddle/Sky-Particles-Shader)
 
 Interactive procedural skies and particle systems. Run it in the browser [here](http://samcodes.itch.io/sky-shader-editor).
 
