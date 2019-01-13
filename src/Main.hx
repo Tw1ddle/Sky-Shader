@@ -18,7 +18,7 @@ class Main {
 	public static inline var DEGREES_TO_RAD:Float = 0.01745329;
 	public static inline var GAME_VIEWPORT_WIDTH:Float = 800;
 	public static inline var GAME_VIEWPORT_HEIGHT:Float = 500;
-	private static inline var REPO_URL:String = "https://github.com/Tw1ddle/SkyShader";
+	private static inline var REPO_URL:String = "https://github.com/Tw1ddle/Sky-Shader";
 	private static inline var TWITTER_URL:String = "https://twitter.com/Sam_Twidale";
 	private static inline var LUDUM_DARE_URL:String = "http://ludumdare.com/compo/ludum-dare-33/?action=preview&uid=42276";
 	private static inline var WEBSITE_URL:String = "http://samcodes.co.uk/";
