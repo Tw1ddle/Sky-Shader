@@ -1,3 +1,5 @@
 -debug
 
+-lib threejs
+
 -js ../bin/debug/js/game.js

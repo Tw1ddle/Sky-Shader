@@ -5,7 +5,7 @@ import js.three.Vector3;
 import util.FileReader;
 import motion.*;
 
-class SkyShader {	
+class SkyShader {
 	public static var uniforms = {
 		luminance: { type: "f", value:1.0 },
 		turbidity: { type: "f", value:1.0 },
@@ -218,14 +218,6 @@ class SkyEffectController {
 		}).onUpdate(function() {
 			this.updateUniforms();
 		});
-		
-		main.starEmitter.alive = 1.0;
-		main.windEmitter.alive = 0.0;
-		
-		main.starEmitter.acceleration.set(0, 9.2, 74);
-		main.starEmitter.accelerationSpread.set(6, 5.1, 25);
-		main.starEmitter.velocity.set(0, -12, 0);
-		main.starEmitter.velocitySpread.set(27, 0, 0);
 	}
 	
 	public function redSunset(duration:Float = 3):Void {
@@ -274,14 +266,6 @@ class SkyEffectController {
 		}).onUpdate(function() {
 			this.updateUniforms();
 		});
-		
-		main.starEmitter.acceleration.set(0, 0, 0);
-		main.starEmitter.accelerationSpread.set(0, 0, 0);
-		main.starEmitter.velocity.set(0, 0, 0);
-		main.starEmitter.velocitySpread.set(0, 0, 0);
-		
-		main.starEmitter.alive = 0.2;
-		main.windEmitter.alive = 0.0;
 	}
 	
 	public function alienDay(duration:Float = 3):Void {
@@ -330,14 +314,6 @@ class SkyEffectController {
 		}).onUpdate(function() {
 			this.updateUniforms();
 		});
-		
-		main.starEmitter.acceleration.set(-19, 3, 0);
-		main.starEmitter.accelerationSpread.set(5.2, 8, 16);
-		main.starEmitter.velocity.set(0, 0, 0);
-		main.starEmitter.velocitySpread.set(69, 0, 0);
-		
-		main.starEmitter.alive = 1.0;
-		main.windEmitter.alive = 0.0;
 	}
 	
 	public function blueDusk(duration:Float = 3):Void {
@@ -386,14 +362,6 @@ class SkyEffectController {
 		}).onUpdate(function() {
 			this.updateUniforms();
 		});
-		
-		main.starEmitter.acceleration.set(-19, 3, 0);
-		main.starEmitter.accelerationSpread.set(5.2, 8, 16);
-		main.starEmitter.velocity.set(0, 0, 0);
-		main.starEmitter.velocitySpread.set(69, 0, 0);
-		
-		main.starEmitter.alive = 0.5;
-		main.windEmitter.alive = 1.0;
 	}
 	
 	public function purpleDusk(duration:Float = 3):Void {
@@ -442,14 +410,6 @@ class SkyEffectController {
 		}).onUpdate(function() {
 			this.updateUniforms();
 		});
-		
-		main.starEmitter.acceleration.set(-19, 3, 0);
-		main.starEmitter.accelerationSpread.set(5.2, 8, 16);
-		main.starEmitter.velocity.set(0, 0, 0);
-		main.starEmitter.velocitySpread.set(69, 0, 0);
-		
-		main.starEmitter.alive = 1.0;
-		main.windEmitter.alive = 0.0;
 	}
 	
 	public function bloodSky(duration:Float = 3):Void {
@@ -498,17 +458,9 @@ class SkyEffectController {
 		}).onUpdate(function() {
 			this.updateUniforms();
 		});
-		
-		main.starEmitter.acceleration.set(-19, 3, 0);
-		main.starEmitter.accelerationSpread.set(5.2, 8, 16);
-		main.starEmitter.velocity.set(0, 0, 0);
-		main.starEmitter.velocitySpread.set(69, 0, 0);
-		
-		main.starEmitter.alive = 0.1;
-		main.windEmitter.alive = 0.2;
 	}
 	
-	public function addGUIItem(c:SkyEffectController, parentGui:GUI):Void {		
+	public function addGUIItem(c:SkyEffectController, parentGui:GUI):Void {
 		var controller:SkyEffectController = cast c;
 		
 		var updateValues = function(t:Dynamic) {

@@ -20,3 +20,13 @@ script:
   - haxe SkyParticles.hxml debug.hxml
   - haxe SkyParticles.hxml release.hxml
   - popd
+
+# Deploy the generated demo using Travis builtin GitHub Pages support
+deploy:
+  provider: pages
+  skip_cleanup: true
+  local_dir: bin/release
+  github_token: $GITHUB_API_KEY
+  target-branch: gh-pages
+  on:
+    branch: master

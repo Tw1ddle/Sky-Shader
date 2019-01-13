@@ -1,3 +1,5 @@
 --no-traces
 
+-lib threejs
+
 -js ../bin/release/js/game.js

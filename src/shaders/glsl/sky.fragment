@@ -108,7 +108,7 @@ void main()
 	texColor += vec3(0.0, 0.001, 0.0025) * 0.3;
 	
 	// Tonemapping
-	vec3 whiteScale = 1.0 / Uncharted2Tonemap(vec3(tonemapWeighting)); 
+	vec3 whiteScale = 1.0 / Uncharted2Tonemap(vec3(tonemapWeighting));
 	vec3 curr = Uncharted2Tonemap((log2(2.0 / pow(luminance, 4.0))) * texColor);
 	vec3 color = curr * whiteScale;
 	vec3 retColor = pow(color, vec3(1.0 / (1.2 + (1.2 * sunfade))));
