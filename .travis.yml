@@ -1,8 +1,11 @@
 sudo: required
 dist: trusty
-
 language: haxe
 
+# Add secure key for Github
+env:
+  global:
+    - secure: Ecr5PlM1RwX5ELgr+x3TgEAfVKl9WeE+z9CQT+c5mdhfzhd/wk881152783JBaR6/SiVNOIodprtLDTIcS1U0DL14hEKVqX8HOruJEB10TOB+9BiO8Ikm8i+BcGM3s+/5lQMTIrXWdrYyICdHV3vB9QRYDG4oDKI5orYjH/itGUYtfC4isDzjNDbjj0aH9Vr3By/1YyYNd5S/tz50Uy4sK0Li3qHyiA/0wjJp3ERKH9GGwl4cSEKLWqhoWVl6xYMR7/zqzMLBXC6UN8LvEHO2jqUzreJIZ6ttB8J66KaH8GgbG+1r5n0A/AxFc5jXXBNNx/40Dz1IGcriXRlih2ntfRlVd3hTEmj5+swrC0EDTnl6uAeVvTg97zJ4JizTaaeAZ6VXNqYUYd5WKpf2KpsG9x6WZXJqd4cHa4hsX5/37u5i2Crd4hjGitPoBdn1O8vQ97VCGQ5wKpBaQoFaubfsNzyv7mviEgDtwizVm/xAMAnZvbkfdKI0u5yGmxVoZkcc7o9UF+85gCsYGJ8Nvvir7ejJ/NJGUMNPXbkdLrb1afSB9dpOcrRb2oNmndEvkKsLMjfnsYv1amqMpbkzJj5g0FIFA/972wR1sGJUQSdMsh76hOmMIMbf2n6pWdOpkTU1uczqoT7xGABjNDqOgHvBYoGx7loGm6hbDPaViA6jlM=
 os:
   - linux
 
