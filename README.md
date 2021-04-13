@@ -13,6 +13,8 @@ Use the controls in the top right of the demo page to modify the shader variable
 
 ## Screenshots
 
+[!Sky Shader Animation](https://github.com/Tw1ddle/Sky-Shader/blob/master/screenshots/sky_shader_animation.gif "Sky Shader Animation")
+
 ![Sky Shader Screenshot 1](https://github.com/Tw1ddle/Sky-Shader/blob/master/screenshots/screenshot_1.png?raw=true "Sky Shader Screenshot 1")
 
 ![Sky Shader Screenshot 2](https://github.com/Tw1ddle/Sky-Shader/blob/master/screenshots/screenshot_2.png?raw=true "Sky Shader Screenshot 2")
