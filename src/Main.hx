@@ -20,7 +20,6 @@ class Main {
 	public static inline var GAME_VIEWPORT_HEIGHT:Float = 500;
 	private static inline var REPO_URL:String = "https://github.com/Tw1ddle/Sky-Shader";
 	private static inline var TWITTER_URL:String = "https://twitter.com/Sam_Twidale";
-	private static inline var LUDUM_DARE_URL:String = "https://ludumdare.com/compo/ludum-dare-33/?action=preview&uid=42276";
 	private static inline var WEBSITE_URL:String = "https://samcodes.co.uk/";
 	private static inline var HAXE_URL:String = "https://haxe.org/";
 	private static inline var THREEJS_URL:String = "https://github.com/mrdoob/three.js/";
@@ -83,7 +82,7 @@ class Main {
 		credits.style.width = '100%';
 		credits.style.textAlign = 'center';
 		credits.style.color = '#333333';
-		credits.innerHTML = 'Created for <a href=' + LUDUM_DARE_URL + ' target="_blank">Ludum Dare 33</a> using <a href=' + HAXE_URL + ' target="_blank">Haxe</a> and <a href=' + THREEJS_URL + ' target="_blank">three.js</a>. Get the code <a href=' + REPO_URL + ' target="_blank">here</a>.';
+		credits.innerHTML = 'Created for Ludum Dare 33 using <a href=' + HAXE_URL + ' target="_blank">Haxe</a> and <a href=' + THREEJS_URL + ' target="_blank">three.js</a>. Get the code <a href=' + REPO_URL + ' target="_blank">here</a>.';
 		gameDiv.appendChild(credits);
 		
 		// Setup WebGL renderer
