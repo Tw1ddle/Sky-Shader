@@ -1,7 +1,7 @@
 [![Project logo](https://github.com/Tw1ddle/Sky-Shader/blob/master/screenshots/logo.png?raw=true "Sky Shader")](https://tw1ddle.github.io/Sky-Shader/)
 
-[![Build Status](https://img.shields.io/travis/Tw1ddle/Sky-Shader.svg?style=flat-square)](https://travis-ci.org/Tw1ddle/Sky-Shader)
 [![License](https://img.shields.io/:license-mit-blue.svg?style=flat-square)](https://github.com/Tw1ddle/Sky-Shader/blob/master/LICENSE)
+[![Build Status Badge](https://ci.appveyor.com/api/projects/status/github/Tw1ddle/Sky-Shader)](https://ci.appveyor.com/project/Tw1ddle/Sky-Shader)
 
 Interactive procedurally generated sun and skies. Run it [in your browser](https://tw1ddle.github.io/Sky-Shader/).
 
@@ -23,10 +23,10 @@ Use the controls in the top right of the demo page to modify the shader variable
 
 ## Credits
 
-The project is written in [Haxe](http://haxe.org/) and uses:
+The project is written in [Haxe](https://haxe.org/) and uses:
 
 * [three.js](https://github.com/mrdoob/three.js) for rendering.
-* Yaroslav Sivakov's [three.js](http://lib.haxe.org/u/yar3333/) externs.
+* Yaroslav Sivakov's [three.js](https://lib.haxe.org/u/yar3333/) externs.
 * dataart's [dat.gui](https://github.com/dataarts/dat.gui) debug UI library.
 * The sky shader is based on a three.js [example](https://threejs.org/examples/).
 

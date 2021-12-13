@@ -1,0 +1,79 @@
+branches:
+  only:
+    - master
+
+image:
+  - Ubuntu2004
+
+environment:
+  GITHUB_API_KEY:
+    secure: w1zaTUARBAuhkAKUke5sBvSkVtlDGL8YfQxROzv5oGIynVJImn+KWGFVDxyjQore
+
+  global:
+    HAXELIB_ROOT: /home/appveyor/haxelib
+    HAXE_INSTALLDIR: /home/appveyor/haxe
+
+install:
+  - cd /home/appveyor
+  - sudo add-apt-repository ppa:haxe/releases -y
+  - sudo apt update
+  - sudo apt install neko tar -y
+  - wget https://github.com/HaxeFoundation/haxe/releases/download/4.2.4/haxe-4.2.4-linux64.tar.gz
+  - mkdir $HAXE_INSTALLDIR
+  - tar -xf haxe-4.2.4-linux64.tar.gz -C $HAXE_INSTALLDIR
+  - export PATH=$PATH:$HAXE_INSTALLDIR/haxe_20211022152000_ab0c054
+  - mkdir $HAXELIB_ROOT && haxelib setup $HAXELIB_ROOT
+  - haxelib install actuate
+  - haxelib install msignal
+  - haxelib install threejs
+  - haxelib list
+  
+  - cd $APPVEYOR_BUILD_FOLDER
+  
+  # Configure CI bot git email/username
+  - git config --global user.name "AppVeyor CI Bot"
+  - git config --global user.email "appveyor@appveyor.org"
+
+  - git submodule update --init --recursive
+  - git submodule update --remote --merge
+  
+build_script:
+  - cd $APPVEYOR_BUILD_FOLDER
+  - pushd src
+  - haxe SkyParticles.hxml debug.hxml
+  - haxe SkyParticles.hxml release.hxml
+  - popd
+
+# Deploy the demo to the GitHub pages branch
+deploy_script:
+  # Important: this goes one level above the original build folder to avoid accidentally trashing the master branch
+  # Then clones the gh-pages repo, resets the history, copies the newly-generated site and pushes back to gh-pages
+  
+  # Configure CI bot git email/username
+  - git config --global user.name "AppVeyor CI Bot"
+  - git config --global user.email "appveyor@appveyor.org"
+  
+  - cd $APPVEYOR_BUILD_FOLDER
+  - cd ..
+  
+  - mkdir gh-pages
+
+  # Get the gh-pages branch as a separate repo
+  - git clone -b gh-pages "https://${GITHUB_API_KEY}@github.com/Tw1ddle/Sky-Shader.git" gh-pages
+  
+  - pushd gh-pages
+  
+  # Reset the gh-pages branch to nothing, discarding history and all
+  - treeHash=$(git hash-object -t tree /dev/null)
+  - firstCommitHash=$(git commit-tree -m "Empty commit" "$treeHash")
+  - git reset --hard "$firstCommitHash"
+  
+  # Move the newly-generated site to the gh-pages folder
+  - cd $APPVEYOR_BUILD_FOLDER/bin/release/
+  - (shopt -s dotglob && mv * ../../../gh-pages)
+  - cd ../../../gh-pages
+
+  # Note that when there is nothing to commit, git commit exits with 1 (but that should never happen here)
+  - git add -A
+  - git commit -m "Build bot updating site"
+  - git push -f origin gh-pages

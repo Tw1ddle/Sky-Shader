@@ -1,6 +1,7 @@
 # Sky Particles Shader
 
-[![Build Status](https://img.shields.io/travis/Tw1ddle/Sky-Particles-Shader.svg?style=flat-square)](https://travis-ci.org/Tw1ddle/Sky-Particles-Shader)
+[![License](https://img.shields.io/:license-mit-blue.svg?style=flat-square)](https://github.com/Tw1ddle/Sky-Shader/blob/master/LICENSE)
+[![Build Status Badge](https://ci.appveyor.com/api/projects/status/github/Tw1ddle/Sky-Shader)](https://ci.appveyor.com/project/Tw1ddle/Sky-Shader)
 
 WebGL sky, sun and particles shader editor.
 
