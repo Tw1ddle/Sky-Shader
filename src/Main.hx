@@ -16,8 +16,8 @@ import shaders.SkyEffectController;
 
 class Main {
 	public static inline var DEGREES_TO_RAD:Float = 0.01745329;
-	public static inline var GAME_VIEWPORT_WIDTH:Float = 800;
-	public static inline var GAME_VIEWPORT_HEIGHT:Float = 500;
+	public static inline var GAME_VIEWPORT_WIDTH:Float = 1200;
+	public static inline var GAME_VIEWPORT_HEIGHT:Float = 800;
 	private static inline var REPO_URL:String = "https://github.com/Tw1ddle/Sky-Shader";
 	private static inline var TWITTER_URL:String = "https://twitter.com/Sam_Twidale";
 	private static inline var WEBSITE_URL:String = "https://samcodes.co.uk/";
@@ -82,7 +82,7 @@ class Main {
 		credits.style.width = '100%';
 		credits.style.textAlign = 'center';
 		credits.style.color = '#333333';
-		credits.innerHTML = 'Created for Ludum Dare 33 using <a href=' + HAXE_URL + ' target="_blank">Haxe</a> and <a href=' + THREEJS_URL + ' target="_blank">three.js</a>. Get the code <a href=' + REPO_URL + ' target="_blank">here</a>.';
+		credits.innerHTML = 'Created by <a href=' + WEBSITE_URL + ' target="_blank">' + 'Sam Twidale' + '</a> for Ludum Dare 33 using <a href=' + HAXE_URL + ' target="_blank">Haxe</a> and <a href=' + THREEJS_URL + ' target="_blank">three.js</a>. Get the code <a href=' + REPO_URL + ' target="_blank">here</a>.';
 		gameDiv.appendChild(credits);
 		
 		// Setup WebGL renderer
